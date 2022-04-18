@@ -18,12 +18,8 @@ export class AppComponent {
   }
 
   blueClass = false
+  fontSize = 16
 
-  checkState() {
-    this.blueClass = !this.blueClass
-    console.log(this.blueClass)
-
-  }
 
   changeImage(e: KeyboardEvent) {
     this.imgURL = (e.target as HTMLInputElement).value;
