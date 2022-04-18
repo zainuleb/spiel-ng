@@ -1,4 +1,8 @@
 <input (keyup)="changeImage($event)" [value]="imgURL" />
-<app-posts [postImg]="imgURL"></app-posts>
-<p>{{ title.toUpperCase() }}</p>
+<app-posts [postImg]="imgURL" (imageSelected)="logImg($event)">
+  <p>Some Caps</p>
+</app-posts>
+<p>{{ title | uppercase }}</p>
 <p>{{ getName().toUpperCase() }}</p>
+<p>{{ currentDate | date: "short" }}</p>
+<p>{{ cost | currency: "JPY" }}</p>
