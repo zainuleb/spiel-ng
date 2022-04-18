@@ -1,3 +1,5 @@
+<button (click)="checkState()" [ngClass]="{ blue: blueClass }">Change</button>
+<hr />
 <input (keyup)="changeImage($event)" [value]="imgURL" />
 <app-posts [postImg]="imgURL" (imageSelected)="logImg($event)">
   <p>Some Caps</p>
@@ -6,3 +8,8 @@
 <p>{{ getName().toUpperCase() }}</p>
 <p>{{ currentDate | date: "short" }}</p>
 <p>{{ cost | currency: "JPY" }}</p>
+<p>{{ temperature | number: "1.2-5" }}</p>
+
+<pre>
+  {{ pizza | json }}
+</pre>

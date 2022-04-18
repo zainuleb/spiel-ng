@@ -10,6 +10,20 @@ export class AppComponent {
   imgURL = 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png';
   currentDate = new Date();
   cost = '2020'
+  temperature = 44.92
+  pizza = {
+    toppings: ['peperoni', 'mushrooms', 'onions', 'sausage'],
+    crust: 'thin',
+    size: 'medium'
+  }
+
+  blueClass = false
+
+  checkState() {
+    this.blueClass = !this.blueClass
+    console.log(this.blueClass)
+
+  }
 
   changeImage(e: KeyboardEvent) {
     this.imgURL = (e.target as HTMLInputElement).value;

@@ -6,3 +6,7 @@ img {
 :host {
   font-size: 40px;
 }
+
+hr {
+  margin: 20px 0;
+}
