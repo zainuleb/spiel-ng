@@ -20,8 +20,6 @@ export class ModalService {
       id,
       visible: false
     })
-
-    console.table(this.modals)
   }
 
   unRegister(id: string) {
