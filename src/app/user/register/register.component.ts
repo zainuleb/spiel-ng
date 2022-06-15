@@ -17,9 +17,7 @@ export class RegisterComponent {
   password = new FormControl('', [
     Validators.required,
     Validators.min(12),
-    Validators.pattern(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/gm
-    ),
+    Validators.pattern(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}/gm),
   ]);
   confirm_password = new FormControl('', [
     Validators.required,
@@ -43,4 +41,8 @@ export class RegisterComponent {
   constructor() {}
 
   ngOnInit(): void {}
+
+  register() {
+    console.log(this.registerForm.value);
+  }
 }
