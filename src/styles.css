@@ -1,11 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body {
   background-color: #161d31;
   color: white;
 }
+@tailwind base;
+@tailwind components;
 
 .material-icons.text-base {
   font-size: inherit;
@@ -278,3 +276,5 @@ body {
     opacity: 0;
   }
 }
+
+@tailwind utilities;
