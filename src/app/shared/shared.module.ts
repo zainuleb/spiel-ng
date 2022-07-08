@@ -25,4 +25,4 @@ import { AlertComponent } from './alert/alert.component';
     AlertComponent,
   ],
 })
-export class SharedModule {}
+export class SharedModule { }

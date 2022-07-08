@@ -23,6 +23,11 @@ export class LoginComponent implements OnInit {
 
   async login() {
 
+    this.showAlert = true;
+    this.alertMsg = 'Please Wait! You are being logged in';
+    this.alertColor = 'blue';
+    this.isSubmission = true;
+
     try {
       await this.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
     } catch (error) {

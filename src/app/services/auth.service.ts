@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import IPlayer from '../models/player.model';
+import IPlayer from '../modals/player.model';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { map, Observable } from 'rxjs';

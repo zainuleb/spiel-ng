@@ -1,4 +1,6 @@
-<app-alert *ngIf="showAlert" [color]="alertColor">{{ alertMsg }}</app-alert>
+<app-alert *ngIf="showAlert" [color]="alertColor">
+  {{ alertMsg }}
+</app-alert>
 <form #loginForm (ngSubmit)="login()">
   <!-- Email -->
   <div class="mb-3">
