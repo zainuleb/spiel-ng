@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { RegisterValidators } from '../validators/register-validators';
 
 @Component({
   selector: 'app-register',
@@ -8,12 +9,11 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-
   //Alert Properties
   showAlert = false;
   alertMsg = 'Please wait your account is being created';
   alertColor = 'blue';
-  inSubmission: boolean = false
+  inSubmission: boolean = false;
 
   name = new FormControl('', [Validators.required, Validators.minLength(3)]);
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -37,47 +37,42 @@ export class RegisterComponent {
     Validators.max(13),
   ]);
 
-  registerForm = new FormGroup({
-    name: this.name,
-    email: this.email,
-    age: this.age,
-    password: this.password,
-    confirm_password: this.confirm_password,
-    phone_number: this.phone_number,
-  });
+  registerForm = new FormGroup(
+    {
+      name: this.name,
+      email: this.email,
+      age: this.age,
+      password: this.password,
+      confirm_password: this.confirm_password,
+      phone_number: this.phone_number,
+    },
+    [RegisterValidators.match('password', 'confirm_password')]
+  );
 
+  constructor(private auth: AuthService) {}
 
-
-  constructor(private auth: AuthService) { }
-
-
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   async register() {
     this.showAlert = true;
     this.alertMsg = 'Please wait your account is being created';
     this.alertColor = 'white';
-    this.inSubmission = true
+    this.inSubmission = true;
 
     const { email, password } = this.registerForm.value;
 
     try {
-      await this.auth.createUser(this.registerForm.value)
+      await this.auth.createUser(this.registerForm.value);
     } catch (e) {
-      console.error(e)
+      console.error(e);
 
       this.alertMsg = 'An unexpected error occured';
-      this.alertColor = 'red'
+      this.alertColor = 'red';
       this.inSubmission = false;
-      return
+      return;
     }
 
     this.alertMsg = 'Your account has been created';
     this.alertColor = 'green';
   }
-
-
-
 }
