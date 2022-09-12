@@ -13,6 +13,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { VideoModule } from './video/video.module';
 
 @NgModule({
   declarations: [AppComponent, NavComponent, HomeComponent, AboutComponent],
@@ -23,6 +24,7 @@ import { AboutComponent } from './about/about.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    VideoModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
