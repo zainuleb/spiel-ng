@@ -6,6 +6,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { map, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,11 @@ export class AuthService {
   private userCollection: AngularFirestoreCollection<IPlayer>;
   public isAuthenticated$: Observable<boolean>;
 
-  constructor(private auth: AngularFireAuth, private db: AngularFirestore) {
+  constructor(
+    private auth: AngularFireAuth,
+    private db: AngularFirestore,
+    private router: Router
+  ) {
     this.userCollection = db.collection('players');
     auth.user.subscribe();
     this.isAuthenticated$ = auth.user.pipe(map((user) => !!user));
@@ -43,5 +48,15 @@ export class AuthService {
     playerCred.user.updateProfile({
       displayName: userData.name,
     });
+  }
+
+  public async logout($event?: Event) {
+    if ($event) {
+      $event.preventDefault();
+    }
+
+    await this.auth.signOut();
+
+    await this.router.navigateByUrl('/');
   }
 }
