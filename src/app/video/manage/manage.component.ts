@@ -11,7 +11,8 @@ export class ManageComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.route.queryParamMap.subscribe((params: Params) => {
-      this.videoOrder = params.sort === '2' ? params.sort : '1';
+      let param = params.params;
+      this.videoOrder = param.sort == '2' ? param.sort : '1';
     });
   }
 
