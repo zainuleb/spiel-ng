@@ -11,6 +11,10 @@ export class UploadComponent implements OnInit {
   isDragover = false;
   file: File | null = null;
   nextStep = false;
+  showAlert = false;
+  alertColor = 'blue';
+  alertMsg = 'Please Wait! Your Moment is being uploaded';
+  inSubmission = false;
 
   title = new FormControl('', [Validators.required, Validators.minLength(3)]);
 
@@ -37,6 +41,11 @@ export class UploadComponent implements OnInit {
   }
 
   uploadFile() {
+    this.showAlert = true;
+    this.alertColor = 'blue';
+    this.alertMsg = 'Please Wait! Your Moment is being uploaded';
+    this.inSubmission = true;
+
     const clipFileName = uuid();
     const clipPath = `clips/${clipFileName}.mp4`;
     this.storage.upload(clipPath, this.file);
