@@ -15,6 +15,7 @@ export class UploadComponent implements OnInit {
   alertColor = 'blue';
   alertMsg = 'Please Wait! Your Moment is being uploaded';
   inSubmission = false;
+  percentage = 0;
 
   title = new FormControl('', [Validators.required, Validators.minLength(3)]);
 
@@ -48,6 +49,10 @@ export class UploadComponent implements OnInit {
 
     const clipFileName = uuid();
     const clipPath = `clips/${clipFileName}.mp4`;
-    this.storage.upload(clipPath, this.file);
+    const task = this.storage.upload(clipPath, this.file);
+
+    task
+      .percentageChanges()
+      .subscribe((progess) => (this.percentage = (progess as number) / 100));
   }
 }
