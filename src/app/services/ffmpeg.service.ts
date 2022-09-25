@@ -24,5 +24,16 @@ export class FfmpegService {
   async getScreenshots(file: File) {
     const data = await fetchFile(file);
     this.ffmpeg.FS('writeFile', file.name, data);
+    await this.ffmpeg.run(
+      '-i',
+      file.name,
+      '-ss',
+      '00:00:01',
+      '-frames:v',
+      '1',
+      'filter:v',
+      'scale=510:-1',
+      'output_01.png'
+    );
   }
 }
