@@ -11,6 +11,7 @@ import { v4 as uuid } from 'uuid';
 import { last, switchMap } from 'rxjs';
 import { Router } from '@angular/router';
 import { FfmpegService } from 'src/app/services/ffmpeg.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-upload',
@@ -96,9 +97,20 @@ export class UploadComponent implements OnDestroy {
     this.task = this.storage.upload(clipPath, this.file);
     const clipRef = this.storage.ref(clipPath);
     this.screenshotTask = this.storage.upload(screenshotPath, screenshotBlob);
-    this.task
-      .percentageChanges()
-      .subscribe((progess) => (this.percentage = (progess as number) / 100));
+
+    combineLatest([
+      this.task.percentageChanges(),
+      this.screenshotTask.percentageChanges(),
+    ]).subscribe((progess) => {
+      const [clipProgress, screenshotProgress] = progess;
+
+      if (!clipProgress || !screenshotProgress) {
+        return;
+      }
+
+      const total = clipProgress + screenshotProgress;
+      this.percentage = (total as number) / 100;
+    });
 
     this.task
       .snapshotChanges()
