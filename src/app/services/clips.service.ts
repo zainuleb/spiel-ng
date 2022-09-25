@@ -15,7 +15,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 })
 export class ClipsService {
   public clipsCollection: AngularFirestoreCollection<IClip>;
-  pageClip: IClip[] = [];
+  pageClips: IClip[] = [];
   pendingReq: boolean = false;
 
   constructor(
@@ -68,10 +68,10 @@ export class ClipsService {
     if (this.pendingReq) return;
     let query = this.clipsCollection.ref.orderBy('timestamp', 'desc').limit(4);
 
-    const { length } = this.pageClip;
+    const { length } = this.pageClips;
 
     if (length) {
-      const lastDocId = this.pageClip[length - 1].docID;
+      const lastDocId = this.pageClips[length - 1].docID;
       const lastDoc = await this.clipsCollection
         .doc(lastDocId)
         .get()
@@ -82,7 +82,7 @@ export class ClipsService {
 
     const snapshot = await query.get();
     snapshot.forEach((doc) => {
-      this.pageClip.push({
+      this.pageClips.push({
         docID: doc.id,
         ...doc.data(),
       });
