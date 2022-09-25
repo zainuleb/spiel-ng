@@ -9,8 +9,7 @@
       <span class="material-icons text-center text-6xl p-8 animate-spin"
         >settings</span
       >
-      ></ng-container
-    >
+    </ng-container>
 
     <ng-template #uploadEditorCtr>
       <!-- Upload Dropbox -->
@@ -29,6 +28,12 @@
           class="w-full px-10 py-40 rounded text-center cursor-pointer border border-dashed border-gray-400 transition duration-500 hover:text-white hover:bg-indigo-400 hover:border-indigo-400 hover:border-solid text-xl"
         >
           <h5>Drop your file here (mp4 only!)</h5>
+          <span
+            *ngIf="ffmpegService.isRunning"
+            class="material-icons material-symbols-outlined text-center text-6xl p-8 animate-spin"
+          >
+            cloud_sync
+          </span>
         </div>
         <input type="text" class="mt-4" (change)="storeFile($event)" />
       </ng-container>
