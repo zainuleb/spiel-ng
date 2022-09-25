@@ -36,7 +36,7 @@ export class FfmpegService {
         `00:00:0${second}`,
         '-frames:v',
         '1',
-        'filter:v',
+        '-filter:v',
         'scale=510:-1',
         `output_0${second}.png`
       );
